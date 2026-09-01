@@ -1,0 +1,2831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+
+    <title>TaxEase - Digital Tax Filing Support</title>
+
+    <style>
+
+        /* =========================
+           BASIC RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #101827;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            height: 66px;
+            background: #080f1d;
+            border-bottom: 1px solid #334155;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            font-size: 22px;
+            color: white;
+        }
+
+        nav div {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #dbeafe;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #22c55e;
+        }
+
+        .signup-btn {
+            background: #22c55e;
+            color: #052e16 !important;
+            padding: 10px 17px;
+            border-radius: 7px;
+        }
+
+        .signup-btn:hover {
+            background: #4ade80;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 430px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111c32,
+                    #123b46
+                );
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #dbeafe;
+            font-size: 20px;
+            line-height: 1.7;
+        }
+
+        .hero button {
+            margin-top: 28px;
+            padding: 13px 28px;
+
+            background: #22c55e;
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .hero button:hover {
+            background: #4ade80;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section {
+            padding: 75px 7%;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 45px;
+        }
+
+        .title::after {
+            content: "";
+            display: block;
+
+            width: 52px;
+            height: 4px;
+
+            background: #22c55e;
+
+            margin: 17px auto 0;
+
+            border-radius: 5px;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            max-width: 950px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .card {
+            background: #1f2937;
+
+            border: 1px solid #334155;
+
+            border-radius: 11px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            min-height: 195px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #263447;
+            border-color: #22c55e;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #0f172a;
+
+            border: 1px solid #334155;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        #how {
+            background: #0f172a;
+        }
+
+        .steps {
+            max-width: 900px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+            background: #1f2937;
+
+            padding: 28px;
+
+            border-radius: 10px;
+
+            border: 1px solid #334155;
+        }
+
+        .number {
+            width: 45px;
+            height: 45px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #22c55e;
+            color: #052e16;
+
+            border-radius: 50%;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #cbd5e1;
+        }
+
+        /* =========================
+           SUPPORT
+        ========================= */
+
+        .help {
+            text-align: center;
+            background: #101827;
+        }
+
+        .help h2 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .help p {
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        .help button {
+            margin-top: 25px;
+
+            padding: 13px 28px;
+
+            background: #22c55e;
+            border: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .help button:hover {
+            background: #4ade80;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 22px;
+
+            text-align: center;
+
+            background: #080f1d;
+
+            border-top: 1px solid #334155;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.75);
+
+            z-index: 2000;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal-box {
+            width: min(600px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #1f2937;
+
+            border: 1px solid #475569;
+
+            border-radius: 12px;
+
+            padding: 30px;
+
+            position: relative;
+
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            position: absolute;
+
+            top: 12px;
+            right: 18px;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            color: #94a3b8;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           FORMS
+        ========================= */
+
+        label {
+            display: block;
+
+            margin-top: 14px;
+            margin-bottom: 7px;
+
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            background: #0f172a;
+
+            border: 1px solid #475569;
+
+            border-radius: 7px;
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid #22c55e;
+            border-color: transparent;
+        }
+
+        .main-btn {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 13px;
+
+            background: #22c55e;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .main-btn:hover {
+            background: #4ade80;
+        }
+
+        .secondary-btn {
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 11px;
+
+            background: transparent;
+
+            color: #cbd5e1;
+
+            border: 1px solid #475569;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+        }
+
+        .secondary-btn:hover {
+            border-color: #22c55e;
+            color: white;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .switch {
+            text-align: center;
+            margin-top: 18px;
+            color: #cbd5e1;
+        }
+
+        .switch span {
+            color: #4ade80;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background: #0f172a;
+
+            border: 1px solid #334155;
+
+            border-left: 4px solid #22c55e;
+
+            border-radius: 8px;
+
+            line-height: 1.9;
+        }
+
+        .big-result {
+            font-size: 24px;
+            color: #4ade80;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 6px 0;
+
+            border-bottom: 1px solid #263447;
+        }
+
+        /* =========================
+           INVOICE
+        ========================= */
+
+        .invoice-items {
+            margin-top: 15px;
+        }
+
+        .invoice-item {
+            display: grid;
+            grid-template-columns: 1fr 100px 100px 40px;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .remove-item {
+            border: none;
+            background: #ef4444;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .invoice-preview {
+            margin-top: 25px;
+
+            padding: 25px;
+
+            background: white;
+
+            color: #111827;
+
+            border-radius: 8px;
+        }
+
+        .invoice-preview h2 {
+            color: #111827;
+        }
+
+        .invoice-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+
+        .invoice-preview th,
+        .invoice-preview td {
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .invoice-total {
+            text-align: right;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        .history-item {
+            background: #0f172a;
+
+            border: 1px solid #334155;
+
+            border-radius: 8px;
+
+            padding: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .history-item strong {
+            color: #4ade80;
+        }
+
+        .history-item small {
+            color: #94a3b8;
+        }
+
+        .empty {
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            nav {
+                height: auto;
+                padding: 15px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav div {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .invoice-item {
+                grid-template-columns: 1fr;
+            }
+
+            .remove-item {
+                height: 38px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <h2>TaxEase</h2>
+
+    <div>
+
+        <a href="#home">Home</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#how">How It Works</a>
+
+        <span id="navLoginLinks" style="display:inline-flex; align-items:center; gap:16px;">
+
+            <a href="#" onclick="openLogin(event)">
+                Login
+            </a>
+
+            <a href="#"
+               class="signup-btn"
+               onclick="openSignup(event)">
+                Sign Up
+            </a>
+
+        </span>
+
+        <span id="navUserBox" style="display:none; align-items:center; gap:14px;">
+
+            <span id="navUserName" class="signup-btn" style="cursor:default;">
+                👤 User
+            </span>
+
+            <a href="#" onclick="logoutUser(event)">
+                Logout
+            </a>
+
+        </span>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <h1>
+        Digital Tax Filing Support
+    </h1>
+
+    <p>
+        Simple and smart tax management
+        support for small businesses
+    </p>
+
+    
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section id="features">
+
+    <h2 class="title">
+        Our Features
+    </h2>
+
+
+    <div class="features">
+
+
+        <!-- INCOME -->
+
+        <div class="card"
+             onclick="window.location.href='Income_Management.html'">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <h3>
+                Income Management
+            </h3>
+
+            <p>
+                Easily record and manage
+                your business income and expenses.
+            </p>
+
+        </div>
+
+
+        <!-- TAX CALCULATOR -->
+
+        <div class="card"
+             onclick="window.location.href='tax-calculator.html'">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h3>
+                Tax Calculator
+            </h3>
+
+            <p>
+                Calculate estimated tax amount
+                quickly.
+            </p>
+
+        </div>
+
+
+        <!-- INVOICE -->
+
+        <div class="card"
+             onclick="window.location.href='invoice.html'">
+
+            <div class="icon">
+                🧾
+            </div>
+
+            <h3>
+                Invoice
+            </h3>
+
+            <p>
+                Create professional invoices
+                for your business.
+            </p>
+
+        </div>
+
+
+        <!-- HISTORY -->
+
+        <div class="card"
+             onclick="openHistory()">
+
+            <div class="icon">
+                🕘
+            </div>
+
+            <h3>
+                History
+            </h3>
+
+            <p>
+                View your saved income,
+                invoices and tax calculations.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HOW IT WORKS
+========================= -->
+
+<section id="how">
+
+    <h2 class="title">
+        How It Works
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="number">
+                1
+            </div>
+
+            <h3>
+                Sign Up
+            </h3>
+
+            <p>
+                Create your business profile.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                2
+            </div>
+
+            <h3>
+                Add Data
+            </h3>
+
+            <p>
+                Enter income and expenses.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                3
+            </div>
+
+            <h3>
+                Calculate
+            </h3>
+
+            <p>
+                Get an estimated tax calculation.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SUPPORT
+========================= -->
+
+<section class="help">
+
+    <h2>
+        Need Help?
+    </h2>
+
+    <p>
+        Our digital support system helps
+        small businesses organize their tax information.
+    </p>
+
+    <button onclick="contactSupport()">
+        Contact Support
+    </button>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 TaxEase | Digital Tax Filing Support
+
+</footer>
+
+
+
+<!-- ==================================================
+     INCOME MODAL
+================================================== -->
+
+<div class="modal" id="incomeModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            💰 Income Management
+        </h2>
+
+        <form id="incomeForm">
+
+            <label>
+                Income Amount (₹)
+            </label>
+
+            <input type="number"
+                   id="incomeAmount"
+                   min="0"
+                   required
+                   placeholder="Enter income">
+
+            <label>
+                Expense Amount (₹)
+            </label>
+
+            <input type="number"
+                   id="expenseAmount"
+                   min="0"
+                   required
+                   placeholder="Enter expenses">
+
+            <label>
+                Description
+            </label>
+
+            <input type="text"
+                   id="incomeDescription"
+                   placeholder="Example: Monthly business income">
+
+            <button class="main-btn"
+                    type="submit">
+                Save Data
+            </button>
+
+        </form>
+
+        <div class="result"
+             id="incomeSummary">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     TAX CALCULATOR MODAL
+================================================== -->
+
+<div class="modal"
+     id="calculatorModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            📊 Tax Calculator
+        </h2>
+
+        <form id="calculatorForm">
+
+            <label>
+                Total Annual Income (₹)
+            </label>
+
+            <input type="number"
+                   id="calcIncome"
+                   min="0"
+                   required
+                   placeholder="Example: 800000">
+
+
+            <label>
+                Total Annual Expenses (₹)
+            </label>
+
+            <input type="number"
+                   id="calcExpense"
+                   min="0"
+                   required
+                   placeholder="Example: 200000">
+
+
+            <label>
+                Estimated Tax Rate (%)
+            </label>
+
+            <input type="number"
+                   id="taxRate"
+                   min="0"
+                   max="100"
+                   value="10"
+                   required>
+
+
+            <button class="main-btn"
+                    type="submit">
+                Calculate Tax
+            </button>
+
+        </form>
+
+
+        <div class="result"
+             id="taxResult">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     INVOICE MODAL
+================================================== -->
+
+<div class="modal"
+     id="invoiceModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            🧾 Create Invoice
+        </h2>
+
+
+        <label>
+            Customer Name
+        </label>
+
+        <input type="text"
+               id="customerName"
+               placeholder="Enter customer name">
+
+
+        <label>
+            Customer Email
+        </label>
+
+        <input type="email"
+               id="customerEmail"
+               placeholder="customer@email.com">
+
+
+        <label>
+            Invoice Number
+        </label>
+
+        <input type="text"
+               id="invoiceNumber">
+
+
+        <h3 style="margin-top:20px;">
+            Invoice Items
+        </h3>
+
+
+        <div id="invoiceItems"
+             class="invoice-items">
+
+        </div>
+
+
+        <button class="secondary-btn"
+                onclick="addInvoiceItem()">
+
+            + Add Item
+
+        </button>
+
+
+        <button class="main-btn"
+                onclick="generateInvoice()">
+
+            Generate Invoice
+
+        </button>
+
+
+        <div id="invoicePreview">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     HISTORY MODAL
+================================================== -->
+
+<div class="modal"
+     id="historyModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            🕘 History
+        </h2>
+
+        <div id="historyList">
+
+        </div>
+
+        <button class="secondary-btn"
+                onclick="clearHistory()">
+
+            Clear History
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     LOGIN MODAL
+================================================== -->
+
+<div class="modal"
+     id="loginModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            🔐 Login
+        </h2>
+
+
+        <form id="loginForm">
+
+            <label>
+                Email
+            </label>
+
+            <input type="email"
+                   id="loginEmail"
+                   required
+                   placeholder="Enter email">
+
+
+            <label>
+                Password
+            </label>
+
+            <input type="password"
+                   id="loginPassword"
+                   required
+                   placeholder="Enter password">
+
+
+            <button class="main-btn"
+                    type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p class="switch">
+
+            Don't have an account?
+
+            <span onclick="switchToSignup()">
+                Sign Up
+            </span>
+
+        </p>
+
+
+        <p class="message"
+           id="loginMessage">
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     SIGNUP MODAL
+================================================== -->
+
+<div class="modal"
+     id="signupModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            📝 Create Account
+        </h2>
+
+
+        <form id="signupForm">
+
+            <label>
+                Full Name
+            </label>
+
+            <input type="text"
+                   id="signupName"
+                   required
+                   placeholder="Enter your name">
+
+
+            <label>
+                Email
+            </label>
+
+            <input type="email"
+                   id="signupEmail"
+                   required
+                   placeholder="Enter email">
+
+
+            <label>
+                Password
+            </label>
+
+            <input type="password"
+                   id="signupPassword"
+                   required
+                   placeholder="Create password">
+
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input type="password"
+                   id="confirmPassword"
+                   required
+                   placeholder="Confirm password">
+
+
+            <button class="main-btn"
+                    type="submit">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p class="switch">
+
+            Already have an account?
+
+            <span onclick="switchToLogin()">
+                Login
+            </span>
+
+        </p>
+
+
+        <p class="message"
+           id="signupMessage">
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     SUPPORT MODAL
+================================================== -->
+
+<div class="modal"
+     id="supportModal">
+
+    <div class="modal-box">
+
+        <span class="close"
+              onclick="closeModals()">
+            ×
+        </span>
+
+        <h2>
+            💬 Contact Support
+        </h2>
+
+        <form id="supportForm">
+
+            <label>
+                Your Name
+            </label>
+
+            <input type="text"
+                   id="supportName"
+                   required
+                   placeholder="Enter your name">
+
+
+            <label>
+                Email
+            </label>
+
+            <input type="email"
+                   id="supportEmail"
+                   required
+                   placeholder="Enter your email">
+
+
+            <label>
+                Message
+            </label>
+
+            <textarea id="supportMessage"
+                      required
+                      placeholder="Write your problem..."></textarea>
+
+
+            <button class="main-btn"
+                    type="submit">
+
+                Send Message
+
+            </button>
+
+        </form>
+
+
+        <p class="message"
+           id="supportResult">
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/* ==================================================
+   BACKEND API CONFIG
+================================================== */
+
+const API_BASE_URL = "http://localhost:5000/api";
+
+
+/* ==================================================
+   GENERAL MODAL FUNCTIONS
+================================================== */
+
+
+function closeModals() {
+
+    const modals =
+        document.querySelectorAll(".modal");
+
+    modals.forEach(function(modal) {
+
+        modal.style.display = "none";
+
+    });
+
+}
+
+
+function openModal(id) {
+
+    closeModals();
+
+    document.getElementById(id).style.display = "flex";
+
+}
+
+
+/* ==================================================
+   LOGIN / SIGNUP
+================================================== */
+
+
+function openLogin(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    openModal("loginModal");
+
+}
+
+
+function openSignup(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    openModal("signupModal");
+
+}
+
+
+function switchToSignup() {
+
+    openModal("signupModal");
+
+}
+
+
+function switchToLogin() {
+
+    openModal("loginModal");
+
+}
+
+
+/* ==================================================
+   GET CURRENT USER
+================================================== */
+
+
+function getCurrentUser() {
+
+    return localStorage.getItem("currentUser")
+        || "Guest";
+
+}
+
+
+/* ==================================================
+   NAVBAR USER DISPLAY
+================================================== */
+
+
+function updateNavUI() {
+
+    const loggedInUser =
+        localStorage.getItem("currentUser");
+
+    const loginLinks =
+        document.getElementById("navLoginLinks");
+
+    const userBox =
+        document.getElementById("navUserBox");
+
+    const userNameEl =
+        document.getElementById("navUserName");
+
+
+    if (loggedInUser) {
+
+        loginLinks.style.display = "none";
+
+        userBox.style.display = "flex";
+
+        userNameEl.textContent =
+            "👤 " + loggedInUser;
+
+    } else {
+
+        loginLinks.style.display = "inline-flex";
+
+        userBox.style.display = "none";
+
+    }
+
+}
+
+
+function logoutUser(event) {
+
+    if (event) {
+        event.preventDefault();
+    }
+
+    localStorage.removeItem("currentUser");
+
+    localStorage.removeItem("authToken");
+
+    addHistory("User logged out");
+
+    updateNavUI();
+
+}
+
+
+/* ==================================================
+   LOGOUT ON MAIN PAGE REFRESH
+   (navigating to other pages like Income Management
+   will NOT log the user out — only reloading this
+   page does)
+================================================== */
+
+
+const navEntries = performance.getEntriesByType("navigation");
+
+if (
+    navEntries.length &&
+    navEntries[0].type === "reload"
+) {
+
+    localStorage.removeItem("currentUser");
+
+    localStorage.removeItem("authToken");
+
+}
+
+
+updateNavUI();
+
+
+/* ==================================================
+   HISTORY
+================================================== */
+
+
+function addHistory(action) {
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("taxHistory")
+        ) || [];
+
+
+    history.push({
+
+        action: action,
+
+        user: getCurrentUser(),
+
+        date:
+            new Date().toLocaleString()
+
+    });
+
+
+    localStorage.setItem(
+        "taxHistory",
+        JSON.stringify(history)
+    );
+
+}
+
+
+function openHistory() {
+
+    openModal("historyModal");
+
+    const list =
+        document.getElementById("historyList");
+
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("taxHistory")
+        ) || [];
+
+
+    if (history.length === 0) {
+
+        list.innerHTML =
+            '<div class="empty">' +
+            'No history available yet.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    for (
+        let i = history.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        html += `
+
+            <div class="history-item">
+
+                <strong>
+                    ${escapeHTML(history[i].action)}
+                </strong>
+
+                <br>
+
+                <small>
+                    👤 ${escapeHTML(history[i].user)}
+                    <br>
+                    🕒 ${escapeHTML(history[i].date)}
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+
+    list.innerHTML = html;
+
+}
+
+
+function clearHistory() {
+
+    if (
+        confirm(
+            "Do you want to delete all history?"
+        )
+    ) {
+
+        localStorage.removeItem(
+            "taxHistory"
+        );
+
+        openHistory();
+
+    }
+
+}
+
+
+/* ==================================================
+   INCOME MANAGEMENT
+================================================== */
+
+
+function openIncome() {
+
+    openModal("incomeModal");
+
+    showIncomeSummary();
+
+}
+
+
+document.getElementById(
+    "incomeForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const income =
+            Number(
+                document.getElementById(
+                    "incomeAmount"
+                ).value
+            );
+
+
+        const expense =
+            Number(
+                document.getElementById(
+                    "expenseAmount"
+                ).value
+            );
+
+
+        const description =
+            document.getElementById(
+                "incomeDescription"
+            ).value;
+
+
+        let records =
+            JSON.parse(
+                localStorage.getItem(
+                    "incomeRecords"
+                )
+            ) || [];
+
+
+        records.push({
+
+            income: income,
+
+            expense: expense,
+
+            description: description,
+
+            date:
+                new Date().toLocaleString()
+
+        });
+
+
+        localStorage.setItem(
+            "incomeRecords",
+            JSON.stringify(records)
+        );
+
+
+        addHistory(
+            "Income data saved - ₹" +
+            income
+        );
+
+
+        alert(
+            "Income and expense saved successfully!"
+        );
+
+
+        document.getElementById(
+            "incomeForm"
+        ).reset();
+
+
+        showIncomeSummary();
+
+    }
+);
+
+
+function showIncomeSummary() {
+
+    const result =
+        document.getElementById(
+            "incomeSummary"
+        );
+
+
+    let records =
+        JSON.parse(
+            localStorage.getItem(
+                "incomeRecords"
+            )
+        ) || [];
+
+
+    let totalIncome = 0;
+
+    let totalExpense = 0;
+
+
+    records.forEach(function(record) {
+
+        totalIncome +=
+            Number(record.income);
+
+        totalExpense +=
+            Number(record.expense);
+
+    });
+
+
+    const profit =
+        totalIncome - totalExpense;
+
+
+    result.style.display = "block";
+
+
+    result.innerHTML = `
+
+        <div class="big-result">
+            Net Profit: ₹${formatMoney(profit)}
+        </div>
+
+        <div class="result-row">
+            <span>Total Income</span>
+            <strong>
+                ₹${formatMoney(totalIncome)}
+            </strong>
+        </div>
+
+        <div class="result-row">
+            <span>Total Expenses</span>
+            <strong>
+                ₹${formatMoney(totalExpense)}
+            </strong>
+        </div>
+
+    `;
+
+}
+
+
+/* ==================================================
+   TAX CALCULATOR
+================================================== */
+
+
+function openCalculator() {
+
+    openModal("calculatorModal");
+
+}
+
+
+document.getElementById(
+    "calculatorForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const income =
+            Number(
+                document.getElementById(
+                    "calcIncome"
+                ).value
+            );
+
+
+        const expenses =
+            Number(
+                document.getElementById(
+                    "calcExpense"
+                ).value
+            );
+
+
+        const rate =
+            Number(
+                document.getElementById(
+                    "taxRate"
+                ).value
+            );
+
+
+        let taxableProfit =
+            income - expenses;
+
+
+        if (taxableProfit < 0) {
+
+            taxableProfit = 0;
+
+        }
+
+
+        const tax =
+            taxableProfit *
+            rate /
+            100;
+
+
+        const afterTax =
+            taxableProfit - tax;
+
+
+        const result =
+            document.getElementById(
+                "taxResult"
+            );
+
+
+        result.style.display = "block";
+
+
+        result.innerHTML = `
+
+            <div class="big-result">
+                Estimated Tax:
+                ₹${formatMoney(tax)}
+            </div>
+
+            <div class="result-row">
+                <span>Total Income</span>
+                <strong>
+                    ₹${formatMoney(income)}
+                </strong>
+            </div>
+
+            <div class="result-row">
+                <span>Total Expenses</span>
+                <strong>
+                    ₹${formatMoney(expenses)}
+                </strong>
+            </div>
+
+            <div class="result-row">
+                <span>Taxable Profit</span>
+                <strong>
+                    ₹${formatMoney(taxableProfit)}
+                </strong>
+            </div>
+
+            <div class="result-row">
+                <span>Tax Rate</span>
+                <strong>
+                    ${rate}%
+                </strong>
+            </div>
+
+            <div class="result-row">
+                <span>Profit After Tax</span>
+                <strong>
+                    ₹${formatMoney(afterTax)}
+                </strong>
+            </div>
+
+        `;
+
+
+        addHistory(
+            "Tax calculated - Estimated Tax ₹" +
+            tax.toFixed(2)
+        );
+
+    }
+);
+
+
+/* ==================================================
+   INVOICE
+================================================== */
+
+
+let invoiceItemCount = 0;
+
+
+function openInvoice() {
+
+    openModal("invoiceModal");
+
+
+    if (
+        document.getElementById(
+            "invoiceItems"
+        ).children.length === 0
+    ) {
+
+        addInvoiceItem();
+
+    }
+
+
+    document.getElementById(
+        "invoiceNumber"
+    ).value =
+        "INV-" +
+        Date.now().toString().slice(-6);
+
+}
+
+
+function addInvoiceItem() {
+
+    invoiceItemCount++;
+
+
+    const container =
+        document.getElementById(
+            "invoiceItems"
+        );
+
+
+    const row =
+        document.createElement("div");
+
+
+    row.className =
+        "invoice-item";
+
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            class="item-name"
+            placeholder="Item / Service"
+        >
+
+        <input
+            type="number"
+            class="item-qty"
+            value="1"
+            min="1"
+            placeholder="Qty"
+        >
+
+        <input
+            type="number"
+            class="item-price"
+            value="0"
+            min="0"
+            placeholder="Price"
+        >
+
+        <button
+            class="remove-item"
+            onclick="this.parentElement.remove()"
+            type="button">
+            ×
+        </button>
+
+    `;
+
+
+    container.appendChild(row);
+
+}
+
+
+function generateInvoice() {
+
+    const customer =
+        document.getElementById(
+            "customerName"
+        ).value;
+
+
+    const email =
+        document.getElementById(
+            "customerEmail"
+        ).value;
+
+
+    const invoiceNo =
+        document.getElementById(
+            "invoiceNumber"
+        ).value;
+
+
+    if (!customer) {
+
+        alert(
+            "Please enter customer name."
+        );
+
+        return;
+
+    }
+
+
+    const rows =
+        document.querySelectorAll(
+            ".invoice-item"
+        );
+
+
+    let total = 0;
+
+    let tableRows = "";
+
+
+    rows.forEach(function(row) {
+
+        const name =
+            row.querySelector(
+                ".item-name"
+            ).value;
+
+
+        const qty =
+            Number(
+                row.querySelector(
+                    ".item-qty"
+                ).value
+            );
+
+
+        const price =
+            Number(
+                row.querySelector(
+                    ".item-price"
+                ).value
+            );
+
+
+        const amount =
+            qty * price;
+
+
+        if (name) {
+
+            total += amount;
+
+
+            tableRows += `
+
+                <tr>
+
+                    <td>
+                        ${escapeHTML(name)}
+                    </td>
+
+                    <td>
+                        ${qty}
+                    </td>
+
+                    <td>
+                        ₹${formatMoney(price)}
+                    </td>
+
+                    <td>
+                        ₹${formatMoney(amount)}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+
+    });
+
+
+    if (!tableRows) {
+
+        alert(
+            "Please add at least one item."
+        );
+
+        return;
+
+    }
+
+
+    const preview =
+        document.getElementById(
+            "invoicePreview"
+        );
+
+
+    preview.innerHTML = `
+
+        <div class="invoice-preview">
+
+            <h2>
+                TaxEase
+            </h2>
+
+            <p>
+                Digital Tax Filing Support
+            </p>
+
+            <hr style="margin:15px 0;">
+
+            <p>
+                <strong>
+                    Invoice No:
+                </strong>
+                ${escapeHTML(invoiceNo)}
+            </p>
+
+            <p>
+                <strong>
+                    Customer:
+                </strong>
+                ${escapeHTML(customer)}
+            </p>
+
+            <p>
+                <strong>
+                    Email:
+                </strong>
+                ${escapeHTML(email || "N/A")}
+            </p>
+
+            <p>
+                <strong>
+                    Date:
+                </strong>
+                ${new Date().toLocaleDateString()}
+            </p>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Item
+                        </th>
+
+                        <th>
+                            Qty
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${tableRows}
+
+                </tbody>
+
+            </table>
+
+
+            <div class="invoice-total">
+
+                Total:
+                ₹${formatMoney(total)}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    addHistory(
+        "Invoice created - " +
+        invoiceNo +
+        " - ₹" +
+        total.toFixed(2)
+    );
+
+
+    saveInvoice(
+        invoiceNo,
+        customer,
+        email,
+        total
+    );
+
+}
+
+
+function saveInvoice(
+    invoiceNo,
+    customer,
+    email,
+    total
+) {
+
+    let invoices =
+        JSON.parse(
+            localStorage.getItem(
+                "invoices"
+            )
+        ) || [];
+
+
+    invoices.push({
+
+        invoiceNo: invoiceNo,
+
+        customer: customer,
+
+        email: email,
+
+        total: total,
+
+        date:
+            new Date().toLocaleString()
+
+    });
+
+
+    localStorage.setItem(
+        "invoices",
+        JSON.stringify(invoices)
+    );
+
+}
+
+
+/* ==================================================
+   SIGN UP
+================================================== */
+
+
+document.getElementById(
+    "signupForm"
+).addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById(
+                "signupName"
+            ).value;
+
+
+        const email =
+            document.getElementById(
+                "signupEmail"
+            ).value
+            .toLowerCase();
+
+
+        const password =
+            document.getElementById(
+                "signupPassword"
+            ).value;
+
+
+        const confirmPassword =
+            document.getElementById(
+                "confirmPassword"
+            ).value;
+
+
+        const message =
+            document.getElementById(
+                "signupMessage"
+            );
+
+
+        if (
+            password !==
+            confirmPassword
+        ) {
+
+            message.style.color =
+                "#ef4444";
+
+            message.innerText =
+                "❌ Passwords do not match.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_BASE_URL + "/auth/signup",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.style.color =
+                    "#ef4444";
+
+                message.innerText =
+                    "❌ " + data.message;
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "authToken",
+                data.token
+            );
+
+            localStorage.setItem(
+                "currentUser",
+                data.user.name
+            );
+
+
+            addHistory(
+                "New account created"
+            );
+
+
+            message.style.color =
+                "#4ade80";
+
+            message.innerText =
+                "✅ Account created successfully!";
+
+
+            updateNavUI();
+
+
+            setTimeout(
+                function() {
+
+                    closeModals();
+
+                },
+                1200
+            );
+
+        } catch (error) {
+
+            message.style.color =
+                "#ef4444";
+
+            message.innerText =
+                "❌ Could not reach server. Is the backend running?";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   LOGIN
+================================================== */
+
+
+document.getElementById(
+    "loginForm"
+).addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById(
+                "loginEmail"
+            ).value
+            .toLowerCase();
+
+
+        const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_BASE_URL + "/auth/login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                message.style.color =
+                    "#ef4444";
+
+                message.innerText =
+                    "❌ " + data.message;
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "authToken",
+                data.token
+            );
+
+            localStorage.setItem(
+                "currentUser",
+                data.user.name
+            );
+
+
+            message.style.color =
+                "#4ade80";
+
+            message.innerText =
+                "✅ Login successful! Welcome " +
+                data.user.name;
+
+
+            addHistory(
+                "User logged in"
+            );
+
+
+            updateNavUI();
+
+
+            setTimeout(
+                function() {
+
+                    closeModals();
+
+                },
+                1200
+            );
+
+        } catch (error) {
+
+            message.style.color =
+                "#ef4444";
+
+            message.innerText =
+                "❌ Could not reach server. Is the backend running?";
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   CONTACT SUPPORT
+================================================== */
+
+
+function contactSupport() {
+
+    openModal("supportModal");
+
+}
+
+
+document.getElementById(
+    "supportForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById(
+                "supportName"
+            ).value;
+
+
+        const email =
+            document.getElementById(
+                "supportEmail"
+            ).value;
+
+
+        const message =
+            document.getElementById(
+                "supportMessage"
+            ).value;
+
+
+        let supportMessages =
+            JSON.parse(
+                localStorage.getItem(
+                    "supportMessages"
+                )
+            ) || [];
+
+
+        supportMessages.push({
+
+            name: name,
+
+            email: email,
+
+            message: message,
+
+            date:
+                new Date().toLocaleString()
+
+        });
+
+
+        localStorage.setItem(
+            "supportMessages",
+            JSON.stringify(
+                supportMessages
+            )
+        );
+
+
+        addHistory(
+            "Support message submitted"
+        );
+
+
+        document.getElementById(
+            "supportResult"
+        ).style.color =
+            "#4ade80";
+
+
+        document.getElementById(
+            "supportResult"
+        ).innerText =
+            "✅ Your support request has been submitted!";
+
+
+        document.getElementById(
+            "supportForm"
+        ).reset();
+
+    }
+);
+
+
+/* ==================================================
+   UTILITY FUNCTIONS
+================================================== */
+
+
+function formatMoney(number) {
+
+    return Number(number).toLocaleString(
+        "en-IN",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ==================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+================================================== */
+
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target.classList.contains(
+                "modal"
+            )
+        ) {
+
+            closeModals();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ESC KEY
+================================================== */
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeModals();
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+</html>
