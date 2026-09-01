@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaxEase - Invoice</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#101827;
+    color:#f8fafc;
+}
+
+/* NAVBAR */
+
+nav{
+    height:62px;
+    background:#080f1d;
+    border-bottom:1px solid #334155;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#dbeafe;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:#22c55e;
+}
+
+.signup{
+    background:#22c55e;
+    color:#052e16 !important;
+    padding:10px 18px;
+    border-radius:7px;
+}
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:55px auto;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.heading h1{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.heading p{
+    color:#cbd5e1;
+}
+
+.line{
+    width:50px;
+    height:4px;
+    background:#22c55e;
+    margin:16px auto;
+    border-radius:5px;
+}
+
+/* INVOICE BOX */
+
+.invoice-box{
+    background:#1f2937;
+    border:1px solid #334155;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+/* TOP */
+
+.invoice-top{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    margin-bottom:30px;
+}
+
+.business h2{
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+.business p,
+.invoice-info p{
+    color:#cbd5e1;
+    line-height:1.7;
+}
+
+.invoice-info{
+    text-align:right;
+}
+
+/* INPUT SECTIONS */
+
+.section-title{
+    color:#4ade80;
+    margin:25px 0 15px;
+    font-size:18px;
+}
+
+.details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.field input{
+    width:100%;
+    padding:12px;
+    background:#0f172a;
+    color:white;
+    border:1px solid #475569;
+    border-radius:7px;
+}
+
+.field input:focus{
+    outline:2px solid #22c55e;
+}
+
+/* TABLE */
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th{
+    background:#0f172a;
+    color:#4ade80;
+    padding:13px;
+    text-align:left;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #334155;
+}
+
+td input{
+    width:100%;
+    padding:9px;
+    background:#111827;
+    color:white;
+    border:1px solid #475569;
+    border-radius:5px;
+}
+
+.amount{
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.remove-btn{
+    background:#ef4444;
+    color:white;
+    border:0;
+    padding:8px 11px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.remove-btn:hover{
+    background:#dc2626;
+}
+
+/* ADD BUTTON */
+
+.add-btn{
+    margin-top:15px;
+    padding:10px 18px;
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    background:#475569;
+}
+
+/* TOTAL */
+
+.total-section{
+    width:350px;
+    max-width:100%;
+    margin-left:auto;
+    margin-top:30px;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #334155;
+}
+
+.grand-total{
+    font-size:21px;
+    color:#4ade80;
+    font-weight:bold;
+}
+
+/* TAX */
+
+.tax-box{
+    margin-top:20px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:12px;
+}
+
+.tax-box input{
+    width:100px;
+    padding:9px;
+    background:#0f172a;
+    color:white;
+    border:1px solid #475569;
+    border-radius:5px;
+}
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.generate-btn,
+.print-btn,
+.clear-btn{
+    flex:1;
+    padding:14px;
+    border:0;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.generate-btn{
+    background:#22c55e;
+    color:#052e16;
+}
+
+.print-btn{
+    background:#3b82f6;
+    color:white;
+}
+
+.clear-btn{
+    background:#475569;
+    color:white;
+}
+
+.generate-btn:hover{
+    background:#4ade80;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#94a3b8;
+    padding:25px;
+    border-top:1px solid #334155;
+    background:#080f1d;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    nav{
+        height:auto;
+        padding:15px 5%;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .nav-links{
+        gap:12px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .invoice-top{
+        flex-direction:column;
+    }
+
+    .invoice-info{
+        text-align:left;
+    }
+
+    .details-grid{
+        grid-template-columns:1fr;
+    }
+
+    .invoice-box{
+        padding:20px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+
+/* PRINT */
+
+@media print{
+
+    nav,
+    footer,
+    .buttons,
+    .add-btn,
+    .remove-btn{
+        display:none !important;
+    }
+
+    body{
+        background:white;
+        color:black;
+    }
+
+    .invoice-box{
+        box-shadow:none;
+        border:none;
+        background:white;
+    }
+
+    .container{
+        width:100%;
+        margin:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        TaxEase
+    </div>
+
+    <div class="nav-links">
+
+        <a href="texease.html">
+            Home
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>Invoice Generator</h1>
+
+        <p>
+            Create professional invoices for your business.
+        </p>
+
+        <div class="line"></div>
+
+    </div>
+
+
+    <div class="invoice-box">
+
+
+        <!-- INVOICE HEADER -->
+
+        <div class="invoice-top">
+
+            <div class="business">
+
+                <h2>TaxEase</h2>
+
+                <p>
+                    Digital Tax Filing Support
+                </p>
+
+                <p>
+                    Small Business Solutions
+                </p>
+
+            </div>
+
+
+            <div class="invoice-info">
+
+                <p>
+                    <strong>Invoice No:</strong>
+                    <span id="invoiceNumber"></span>
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    <span id="invoiceDate"></span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <h3 class="section-title">
+            Customer Details
+        </h3>
+
+        <div class="details-grid">
+
+            <div class="field">
+
+                <label>
+                    Customer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter customer name"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Customer Email
+                </label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    placeholder="customer@email.com"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Customer Phone
+                </label>
+
+                <input
+                    type="text"
+                    id="customerPhone"
+                    placeholder="Enter phone number"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Customer Address
+                </label>
+
+                <input
+                    type="text"
+                    id="customerAddress"
+                    placeholder="Enter address"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- ITEMS -->
+
+        <h3 class="section-title">
+            Invoice Items
+        </h3>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Price (₹)
+                        </th>
+
+                        <th>
+                            Amount (₹)
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="items">
+
+                    <tr>
+
+                        <td>
+                            <input
+                                type="text"
+                                class="description"
+                                placeholder="Product / Service"
+                            >
+                        </td>
+
+                        <td>
+                            <input
+                                type="number"
+                                class="quantity"
+                                value="1"
+                                min="1"
+                                oninput="calculateTotal()"
+                            >
+                        </td>
+
+                        <td>
+                            <input
+                                type="number"
+                                class="price"
+                                value="0"
+                                min="0"
+                                oninput="calculateTotal()"
+                            >
+                        </td>
+
+                        <td class="amount">
+                            ₹0.00
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="remove-btn"
+                                onclick="removeItem(this)">
+
+                                ✕
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- ADD ITEM -->
+
+        <button
+            class="add-btn"
+            onclick="addItem()">
+
+            + Add Item
+
+        </button>
+
+
+        <!-- TAX -->
+
+        <div class="tax-box">
+
+            <label>
+                Tax (%)
+            </label>
+
+            <input
+                type="number"
+                id="tax"
+                value="18"
+                min="0"
+                max="100"
+                oninput="calculateTotal()"
+            >
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="total-section">
+
+            <div class="total-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="subtotal">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    Tax
+                </span>
+
+                <strong id="taxAmount">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="total-row grand-total">
+
+                <span>
+                    Grand Total
+                </span>
+
+                <strong id="grandTotal">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <button
+                class="generate-btn"
+                onclick="generateInvoice()">
+
+                Generate Invoice
+
+            </button>
+
+
+            <button
+                class="print-btn"
+                onclick="window.print()">
+
+                🖨 Print / Save PDF
+
+            </button>
+
+
+            <button
+                class="clear-btn"
+                onclick="clearInvoice()">
+
+                Clear
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 TaxEase | Digital Tax Filing Support
+
+</footer>
+
+
+<script>
+
+/* INVOICE NUMBER */
+
+document.getElementById("invoiceNumber").textContent =
+    "INV-" + Math.floor(100000 + Math.random() * 900000);
+
+
+/* DATE */
+
+const today = new Date();
+
+document.getElementById("invoiceDate").textContent =
+    today.toLocaleDateString("en-IN");
+
+
+/* MONEY */
+
+function money(value){
+
+    return Number(value).toLocaleString(
+        "en-IN",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* ADD ITEM */
+
+function addItem(){
+
+    const table =
+        document.getElementById("items");
+
+    const row =
+        document.createElement("tr");
+
+    row.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                class="description"
+                placeholder="Product / Service">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="quantity"
+                value="1"
+                min="1"
+                oninput="calculateTotal()">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="price"
+                value="0"
+                min="0"
+                oninput="calculateTotal()">
+
+        </td>
+
+        <td class="amount">
+            ₹0.00
+        </td>
+
+        <td>
+
+            <button
+                class="remove-btn"
+                onclick="removeItem(this)">
+
+                ✕
+
+            </button>
+
+        </td>
+
+    `;
+
+    table.appendChild(row);
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(button){
+
+    const rows =
+        document.querySelectorAll("#items tr");
+
+    if(rows.length === 1){
+
+        alert("At least one item is required.");
+
+        return;
+    }
+
+    button.closest("tr").remove();
+
+    calculateTotal();
+
+}
+
+
+/* CALCULATE */
+
+function calculateTotal(){
+
+    const rows =
+        document.querySelectorAll("#items tr");
+
+    let subtotal = 0;
+
+
+    rows.forEach(function(row){
+
+        const quantity =
+            Number(
+                row.querySelector(".quantity").value
+            ) || 0;
+
+        const price =
+            Number(
+                row.querySelector(".price").value
+            ) || 0;
+
+        const amount =
+            quantity * price;
+
+        row.querySelector(".amount").textContent =
+            "₹" + money(amount);
+
+        subtotal += amount;
+
+    });
+
+
+    const taxRate =
+        Number(
+            document.getElementById("tax").value
+        ) || 0;
+
+
+    const taxAmount =
+        subtotal * taxRate / 100;
+
+
+    const grandTotal =
+        subtotal + taxAmount;
+
+
+    document.getElementById("subtotal").textContent =
+        "₹" + money(subtotal);
+
+    document.getElementById("taxAmount").textContent =
+        "₹" + money(taxAmount);
+
+    document.getElementById("grandTotal").textContent =
+        "₹" + money(grandTotal);
+
+}
+
+
+/* GENERATE */
+
+function generateInvoice(){
+
+    const customer =
+        document.getElementById("customerName").value.trim();
+
+    if(customer === ""){
+
+        alert("Please enter customer name.");
+
+        return;
+    }
+
+
+    calculateTotal();
+
+
+    const total =
+        document.getElementById("grandTotal").textContent;
+
+
+    alert(
+        "Invoice generated successfully!\\n\\n" +
+        "Customer: " + customer +
+        "\\nTotal: " + total
+    );
+
+
+    /* SAVE TO HISTORY */
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("taxHistory")
+        ) || [];
+
+
+    history.push({
+
+        type:"Invoice",
+
+        customer:customer,
+
+        total:total,
+
+        date:new Date().toLocaleString("en-IN")
+
+    });
+
+
+    localStorage.setItem(
+        "taxHistory",
+        JSON.stringify(history)
+    );
+
+}
+
+
+/* CLEAR */
+
+function clearInvoice(){
+
+    document.getElementById("customerName").value = "";
+
+    document.getElementById("customerEmail").value = "";
+
+    document.getElementById("customerPhone").value = "";
+
+    document.getElementById("customerAddress").value = "";
+
+    document.getElementById("tax").value = "18";
+
+
+    const items =
+        document.getElementById("items");
+
+    items.innerHTML = `
+
+        <tr>
+
+            <td>
+
+                <input
+                    type="text"
+                    class="description"
+                    placeholder="Product / Service">
+
+            </td>
+
+            <td>
+
+                <input
+                    type="number"
+                    class="quantity"
+                    value="1"
+                    min="1"
+                    oninput="calculateTotal()">
+
+            </td>
+
+            <td>
+
+                <input
+                    type="number"
+                    class="price"
+                    value="0"
+                    min="0"
+                    oninput="calculateTotal()">
+
+            </td>
+
+            <td class="amount">
+                ₹0.00
+            </td>
+
+            <td>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeItem(this)">
+
+                    ✕
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    calculateTotal();
+
+}
+
+</script>
+
+</body>
+</html>

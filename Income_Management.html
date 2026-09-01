@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaxEase - Income Management</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0e1726;
+      color: #f5f7fb;
+    }
+
+    .navbar {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      background: #091221;
+      border-bottom: 1px solid #29415c;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .signup {
+      background: #19c765;
+      padding: 10px 18px;
+      border-radius: 7px;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 58px 30px 70px;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .heading h1 {
+      margin: 0 0 14px;
+      font-size: 31px;
+    }
+
+    .underline {
+      width: 48px;
+      height: 4px;
+      margin: auto;
+      border-radius: 3px;
+      background: #19c765;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: #1d2939;
+      border: 1px solid #34465e;
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.14);
+    }
+
+    .card h2 {
+      margin: 0 0 7px;
+      font-size: 21px;
+    }
+
+    .subtitle {
+      color: #bfc9d7;
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5eaf1;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #465970;
+      background: #111c2b;
+      color: #fff;
+      border-radius: 6px;
+      padding: 12px 13px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #19c765;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 21px;
+      border: 0;
+      border-radius: 7px;
+      padding: 13px;
+      background: #19c765;
+      color: #06130b;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .submit:hover { background: #15b75b; }
+
+    .summary {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .summary-box {
+      background: #1d2939;
+      border: 1px solid #34465e;
+      border-radius: 10px;
+      padding: 21px;
+    }
+
+    .summary-box h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #bfc9d7;
+      font-weight: 600;
+    }
+
+    .amount {
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .income { color: #36db7d; }
+    .expense { color: #ff7d7d; }
+
+    .recent {
+      margin-top: 24px;
+    }
+
+    .recent h2 {
+      margin: 0 0 15px;
+      font-size: 20px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: #1d2939;
+      border: 1px solid #34465e;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #304055;
+    }
+
+    th {
+      color: #bfc9d7;
+      font-weight: 600;
+      background: #182435;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .empty {
+      color: #9eabba;
+      text-align: center;
+      padding: 28px;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: 1px solid #a34d4d;
+      color: #ff9b9b;
+      border-radius: 5px;
+      padding: 5px 9px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { gap: 12px; }
+      .nav-links a:not(.signup) { display: none; }
+      .page { padding: 40px 16px; }
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">TaxEase</div>
+    <div class="nav-links">
+      <a href="texease.html">Home</a>
+
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="heading">
+      <h1>Income Management</h1>
+      <div class="underline"></div>
+    </div>
+
+    <section class="layout">
+      <div>
+        <div class="card">
+          <h2>Add Income / Expense</h2>
+          <p class="subtitle">Record and manage your business income and expenses.</p>
+
+          <form id="transactionForm">
+            <div class="form-grid">
+              <div>
+                <label for="type">Transaction Type</label>
+                <select id="type" required>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="amount">Amount (₹)</label>
+                <input id="amount" type="number" min="0" step="0.01" placeholder="Enter amount" required />
+              </div>
+
+              <div>
+                <label for="category">Category</label>
+                <select id="category" required>
+                  <option value="Business">Business</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Office">Office</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="date">Date</label>
+                <input id="date" type="date" required />
+              </div>
+
+              <div class="full">
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Enter transaction details..."></textarea>
+              </div>
+            </div>
+
+            <button class="submit" type="submit">Save Transaction</button>
+          </form>
+        </div>
+
+        <div class="recent">
+          <h2>Recent Transactions</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="transactionList">
+                <tr>
+                  <td colspan="6" class="empty">No transactions added yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <div class="summary-box">
+          <h3>Total Income</h3>
+          <div class="amount income" id="totalIncome">₹0.00</div>
+        </div>
+
+        <div class="summary-box">
+          <h3>Total Expenses</h3>
+          <div class="amount expense" id="totalExpense">₹0.00</div>
+        </div>
+
+        <div class="summary-box">
+          <h3>Net Balance</h3>
+          <div class="amount" id="netBalance">₹0.00</div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE_URL = "http://localhost:5000/api";
+
+    const form = document.getElementById("transactionForm");
+    const list = document.getElementById("transactionList");
+    const incomeEl = document.getElementById("totalIncome");
+    const expenseEl = document.getElementById("totalExpense");
+    const balanceEl = document.getElementById("netBalance");
+    const dateInput = document.getElementById("date");
+
+    const token = localStorage.getItem("authToken");
+
+    let transactions = [];
+
+    dateInput.value = new Date().toISOString().split("T")[0];
+
+    function money(value) {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR"
+      }).format(value);
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    function render() {
+      let income = 0, expense = 0;
+
+      transactions.forEach(t => {
+        if (t.type === "income") income += t.amount;
+        else expense += t.amount;
+      });
+
+      incomeEl.textContent = money(income);
+      expenseEl.textContent = money(expense);
+      balanceEl.textContent = money(income - expense);
+
+      if (!transactions.length) {
+        list.innerHTML = '<tr><td colspan="6" class="empty">No transactions added yet.</td></tr>';
+        return;
+      }
+
+      list.innerHTML = transactions.map((t) => `
+        <tr>
+          <td>${new Date(t.date).toLocaleDateString("en-IN")}</td>
+          <td>${t.type === "income" ? "Income" : "Expense"}</td>
+          <td>${escapeHTML(t.category)}</td>
+          <td>${escapeHTML(t.description || "-")}</td>
+          <td class="${t.type === "income" ? "income" : "expense"}">
+            ${t.type === "income" ? "+" : "-"}${money(t.amount)}
+          </td>
+          <td><button class="delete-btn" onclick="removeTransaction('${t._id}')">Delete</button></td>
+        </tr>
+      `).join("");
+    }
+
+    async function loadTransactions() {
+      if (!token) {
+        list.innerHTML = '<tr><td colspan="6" class="empty">Please log in on the main site to view your transactions.</td></tr>';
+        return;
+      }
+
+      try {
+        const response = await fetch(API_BASE_URL + "/transactions", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!response.ok) {
+          list.innerHTML = '<tr><td colspan="6" class="empty">Please log in on the main site to view your transactions.</td></tr>';
+          return;
+        }
+
+        transactions = await response.json();
+        render();
+
+      } catch (error) {
+        list.innerHTML = '<tr><td colspan="6" class="empty">Could not reach server. Is the backend running?</td></tr>';
+      }
+    }
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      if (!token) {
+        alert("Please log in on the main site first.");
+        return;
+      }
+
+      const transaction = {
+        type: document.getElementById("type").value,
+        amount: Number(document.getElementById("amount").value),
+        category: document.getElementById("category").value,
+        date: document.getElementById("date").value,
+        description: document.getElementById("description").value.trim()
+      };
+
+      try {
+        const response = await fetch(API_BASE_URL + "/transactions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(transaction)
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          alert(data.message || "Could not save transaction.");
+          return;
+        }
+
+        form.reset();
+        dateInput.value = new Date().toISOString().split("T")[0];
+        await loadTransactions();
+
+      } catch (error) {
+        alert("Could not reach server. Is the backend running?");
+      }
+    });
+
+    async function removeTransaction(id) {
+      try {
+        const response = await fetch(API_BASE_URL + "/transactions/" + id, {
+          method: "DELETE",
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!response.ok) {
+          alert("Could not delete transaction.");
+          return;
+        }
+
+        await loadTransactions();
+
+      } catch (error) {
+        alert("Could not reach server. Is the backend running?");
+      }
+    }
+
+    loadTransactions();
+  </script>
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaxEase - Tax Calculator</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#101827;
+    color:#f8fafc;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+nav{
+    height:62px;
+    background:#080f1d;
+    border-bottom:1px solid #334155;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#dbeafe;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    color:#22c55e;
+}
+
+.signup{
+    background:#22c55e;
+    color:#052e16 !important;
+    padding:10px 18px;
+    border-radius:7px;
+}
+
+/* PAGE */
+
+.page{
+    min-height:calc(100vh - 62px);
+
+    display:flex;
+    justify-content:center;
+
+    padding:65px 20px;
+}
+
+.calculator{
+    width:100%;
+    max-width:850px;
+}
+
+/* HEADING */
+
+.heading{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.heading h1{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.heading p{
+    color:#cbd5e1;
+    font-size:16px;
+}
+
+.line{
+    width:50px;
+    height:4px;
+
+    background:#22c55e;
+
+    border-radius:5px;
+
+    margin:17px auto 0;
+}
+
+/* BOX */
+
+.box{
+    background:#1f2937;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    padding:32px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+/* FORM */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:22px;
+}
+
+.field label{
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.field input,
+.field select{
+
+    width:100%;
+
+    padding:13px;
+
+    background:#0f172a;
+
+    color:white;
+
+    border:1px solid #475569;
+
+    border-radius:7px;
+
+    font-size:15px;
+}
+
+.field input:focus,
+.field select:focus{
+
+    outline:2px solid #22c55e;
+
+    border-color:transparent;
+}
+
+/* BUTTON */
+
+.calculate{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    background:#22c55e;
+
+    color:#052e16;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.calculate:hover{
+    background:#4ade80;
+}
+
+.clear{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:12px;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    border:1px solid #475569;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.clear:hover{
+    border-color:#22c55e;
+    color:white;
+}
+
+/* RESULT */
+
+.result{
+
+    display:none;
+
+    margin-top:25px;
+
+    background:#0f172a;
+
+    border:1px solid #334155;
+
+    border-left:4px solid #22c55e;
+
+    border-radius:8px;
+
+    padding:22px;
+}
+
+.result h2{
+
+    color:#4ade80;
+
+    margin-bottom:15px;
+}
+
+.result-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:11px 0;
+
+    border-bottom:1px solid #263447;
+}
+
+.tax-value{
+
+    font-size:26px;
+
+    color:#4ade80;
+}
+
+.note{
+
+    margin-top:18px;
+
+    padding:12px;
+
+    background:#172033;
+
+    border-radius:7px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+/* FOOTER */
+
+footer{
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#94a3b8;
+
+    border-top:1px solid #334155;
+
+    background:#080f1d;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    nav{
+
+        height:auto;
+
+        padding:15px 5%;
+
+        flex-direction:column;
+
+        gap:14px;
+    }
+
+    .nav-links{
+
+        gap:13px;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .box{
+
+        padding:22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        TaxEase
+    </div>
+
+    <div class="nav-links">
+
+        <a href="texease.html">
+            Home
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="page">
+
+<div class="calculator">
+
+
+    <!-- HEADING -->
+
+    <div class="heading">
+
+        <h1>
+            Tax Calculator
+        </h1>
+
+        <p>
+            Calculate your estimated business tax quickly and easily.
+        </p>
+
+        <div class="line"></div>
+
+    </div>
+
+
+    <!-- CALCULATOR BOX -->
+
+    <div class="box">
+
+
+        <form id="taxForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- INCOME -->
+
+                <div class="field">
+
+                    <label>
+                        Annual Income (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="income"
+                        min="0"
+                        placeholder="Example: 800000"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EXPENSE -->
+
+                <div class="field">
+
+                    <label>
+                        Annual Expenses (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="expenses"
+                        min="0"
+                        placeholder="Example: 200000"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TAX RATE -->
+
+                <div class="field">
+
+                    <label>
+                        Estimated Tax Rate (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="rate"
+                        min="0"
+                        max="100"
+                        value="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TYPE -->
+
+                <div class="field">
+
+                    <label>
+                        Calculation Type
+                    </label>
+
+                    <select id="type">
+
+                        <option>
+                            Business Estimate
+                        </option>
+
+                        <option>
+                            Simple Tax Estimate
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CALCULATE -->
+
+            <button
+                type="submit"
+                class="calculate">
+
+                🧮 Calculate Tax
+
+            </button>
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear"
+                onclick="clearCalculator()">
+
+                Clear
+
+            </button>
+
+
+        </form>
+
+
+        <!-- RESULT -->
+
+        <div
+            class="result"
+            id="result">
+
+
+            <h2>
+                Tax Calculation Result
+            </h2>
+
+
+            <div class="result-row">
+
+                <span>
+                    Annual Income
+                </span>
+
+                <strong id="rIncome">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>
+                    Annual Expenses
+                </span>
+
+                <strong id="rExpenses">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>
+                    Taxable Profit
+                </span>
+
+                <strong id="rProfit">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>
+                    Tax Rate
+                </span>
+
+                <strong id="rRate">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <span>
+                    Estimated Tax
+                </span>
+
+                <strong
+                    class="tax-value"
+                    id="rTax">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="note">
+                This is only an estimated calculation based on the values you entered. Actual tax liability may vary — please consult a tax professional for accurate filing.
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    &copy; 2026 TaxEase. All rights reserved.
+</footer>
+
+
+<script>
+
+const taxForm = document.getElementById("taxForm");
+const resultBox = document.getElementById("result");
+
+taxForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const income = parseFloat(document.getElementById("income").value) || 0;
+    const expenses = parseFloat(document.getElementById("expenses").value) || 0;
+    const rate = parseFloat(document.getElementById("rate").value) || 0;
+    const type = document.getElementById("type").value;
+
+    let profit;
+
+    if (type === "Simple Tax Estimate") {
+        profit = income;
+    } else {
+        profit = income - expenses;
+    }
+
+    if (profit < 0) {
+        profit = 0;
+    }
+
+    const tax = (profit * rate) / 100;
+
+    document.getElementById("rIncome").textContent = formatCurrency(income);
+    document.getElementById("rExpenses").textContent = formatCurrency(expenses);
+    document.getElementById("rProfit").textContent = formatCurrency(profit);
+    document.getElementById("rRate").textContent = rate + "%";
+    document.getElementById("rTax").textContent = formatCurrency(tax);
+
+    resultBox.style.display = "block";
+
+    resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+});
+
+function formatCurrency(value) {
+    return "₹" + value.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function clearCalculator() {
+
+    taxForm.reset();
+    document.getElementById("rate").value = 10;
+    resultBox.style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
